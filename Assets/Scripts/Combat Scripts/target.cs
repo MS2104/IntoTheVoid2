@@ -17,6 +17,7 @@ public class target : MonoBehaviour
         void deaded()
         {
             Destroy(gameObject);
+            Debug.Log("deadplayer");
         }
     }
 }
