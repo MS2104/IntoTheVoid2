@@ -19,6 +19,7 @@ public class betterGun : MonoBehaviour
     public AudioSource battletheme;
     public AudioSource normaltheme;
     public bool playaudio = true;
+    float decrease = 0.0005f;
 
 
     // Update is called once per frame
@@ -77,13 +78,14 @@ public class betterGun : MonoBehaviour
         print("Starting " + Time.time);
         if(playaudio == true)
         {
+            StartCoroutine("FadeOut");
             battletheme.Play();
             playaudio = false;
         }
         
         // Start function WaitAndPrint as a coroutine. And wait until it is completed.
         // the same as yield return WaitAndPrint(2.0f);
-        yield return StartCoroutine(EndSound(5.0f));
+        yield return StartCoroutine(EndSound(20.0f));
         print("Done " + Time.time);
     }
 
@@ -97,8 +99,24 @@ public class betterGun : MonoBehaviour
      
         yield return new WaitForSeconds(waitTime);
         print("WaitAndPrint " + Time.time);
-        battletheme.Stop();
-        normaltheme.Play();
+        
+        if (battletheme.volume == 0f)
+        {
+            normaltheme.Play();
+            StopCoroutine("FadeOut");
+            battletheme.volume = 1f;
+        }
+        
         playaudio = true;
+    }
+    public IEnumerator FadeOut()
+    {
+
+        while (battletheme.volume < 1)
+        {
+
+            battletheme.volume -= decrease;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
