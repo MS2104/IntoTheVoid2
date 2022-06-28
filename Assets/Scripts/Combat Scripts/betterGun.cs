@@ -53,11 +53,11 @@ public class betterGun : MonoBehaviour
                 muzzleflash.Play();
 
                 Debug.Log(hit.transform.name);
-                target target = hit.transform.GetComponent<target>();
+                target2 target2 = hit.transform.GetComponent<target2>();
 
-                if (target != null)
+                if (target2 != null)
                 {
-                    target.TakeDamge(damage);
+                    target2.TakeDamge(damage);
                     StartCoroutine("StartSound");
                 }
 
