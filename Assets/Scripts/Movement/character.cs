@@ -6,6 +6,7 @@ public class character : MonoBehaviour
 {
     public CharacterController controller;
 
+    public PlayerData playerdatas;
     public AudioSource EE;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -48,6 +49,33 @@ public class character : MonoBehaviour
         {
             EE.Play();
         }
+
+        
+    
     }
+    private void OnTriggerEnter (Collider other)
+    {
+        if (other.tag == "Door")
+        {
+            if(playerdatas.keycollected == true)
+            {
+                DoorControl doorcontrol = other.GetComponent<DoorControl>();
+                doorcontrol.Open();
+                Debug.Log("door is triggered ");
+            }
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Door")
+        {
+            DoorControl doorcontrol = other.GetComponent<DoorControl>();
+            doorcontrol.Close();
+            Debug.Log("door is triggered ");
+        }
+    }
+
 }
 

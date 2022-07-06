@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public GameObject mission;
     public GameObject keycard;
     public AudioSource asound;
+    public GameObject key;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Card")
@@ -28,7 +29,7 @@ public class PlayerData : MonoBehaviour
         {
             mission.SetActive(false);
             objcol.SetActive(true);
-
+            key.SetActive(true);
         }
 
         else if(keycollected == false)
